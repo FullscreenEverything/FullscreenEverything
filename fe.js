@@ -15,6 +15,11 @@ function mouseOut(event) {
 }
 
 function click(event) {
+    // turn off selecting mode
+    document.removeEventListener("mouseover", mouseOver);
+    document.removeEventListener("mouseout", mouseOut);
+    document.removeEventListener("click", click);
+
     openFullscreen(event.target);
     event.target.style.outline = "";
     // TODO: backgroundColor
