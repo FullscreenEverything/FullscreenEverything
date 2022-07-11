@@ -20,15 +20,12 @@ function click(event) {
     document.removeEventListener("mouseout", mouseOut);
     document.removeEventListener("click", click);
 
-    openFullscreen(event.target);
+    /* only fullscreen when not  */
+    if (!document.fullscreenElement) {
+        event.target.requestFullscreen();
+    }
+
     event.target.style.outline = "";
     // TODO: backgroundColor
     event.target.style.backgroundColor = 'white';
-}
-
-function openFullscreen(elem) {
-    /* only fullscreen when not  */
-    if (!document.fullscreenElement) {
-        elem.requestFullscreen();
-    }
 }
