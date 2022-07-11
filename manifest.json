@@ -1,0 +1,14 @@
+{
+    "manifest_version": 3,
+    "name": "FullscreenEverything",
+    "version": "0.0.0",
+    "description": "Fullscreen everything in your browser's web page",
+    "permissions": ["activeTab", "scripting"],
+    "action": {
+        "default_title": "Click to activate"
+    },
+    "background":
+    {
+        "service_worker": "main.js"
+    }
+}
