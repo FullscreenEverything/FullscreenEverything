@@ -1,38 +1,60 @@
-document.addEventListener("mouseover", mouseOver);
-document.addEventListener("mouseout", mouseOut);
-document.addEventListener("click", click);
-document.addEventListener("fullscreenchange", fschange);
+var bak_target;
+var bak_backgroundColor;
+var bak_outline;
+var bak_overflow;
+if (registered == undefined) {
+    var registered = false;
+}
+if (selecting == undefined) {
+    var selecting = true;
+}
 
-let bgc_bak;
-let event_target;
+if (!registered) {
+    document.addEventListener("mouseover", mouseOver);
+    document.addEventListener("mouseout", mouseOut);
+    document.addEventListener("click", click);
+    document.addEventListener("fullscreenchange", fschange);
+    registered = true;
+}
+
+selecting = true;
 
 function mouseOver(event) {
-    if (!document.fullscreenElement) {
-        event.target.style.outline = "3px rgba(134,206,203, 0.8) solid";
+    if (selecting) {
+        bak_outline = event.target.style.outline;
+        event.target.style.outline = "3px rgba(134, 206, 203, 0.8) solid";
     }
 }
 
 function mouseOut(event) {
-    if (!document.fullscreenElement) {
-        event.target.style.outline = "";
+    if (selecting) {
+        event.target.style.outline = bak_outline;
     }
 }
 
 function click(event) {
-    // turn off selecting mode
-    document.removeEventListener("mouseover", mouseOver);
-    document.removeEventListener("mouseout", mouseOut);
-    document.removeEventListener("click", click);
-
     /* only fullscreen when not  */
-    if (!document.fullscreenElement) {
+    if (selecting && !document.fullscreenElement) {
+        selecting = false;
         event.target.requestFullscreen();
+        event.target.style.outline = bak_outline;
+        // save style
+        bak_target = event.target;
+        bak_backgroundColor = event.target.style.backgroundColor;
+        bak_overflow = event.target.style.overflow;
+        // set style
+        event.target.style.backgroundColor = getBGC(event.target);
+        event.target.style.overflow = "auto";
     }
+}
 
-    event.target.style.outline = "";
-    event_target = event.target;
-    bgc_bak = event.target.style.backgroundColor;
-    event.target.style.backgroundColor = getBGC(event.target);
+function fschange() {
+    // if exit fullscreen
+    if (!document.fullscreenElement) {
+        // restore style
+        bak_target.style.backgroundColor = bak_backgroundColor;
+        bak_target.style.overflow = bak_overflow;
+    }
 }
 
 function getBGC(elem) {
@@ -100,9 +122,3 @@ function colorValues(color)
     }
 }
 
-function fschange() {
-    // if exit fullscreen
-    if (!document.fullscreenElement) {
-        event_target.style.backgroundColor = bgc_bak;
-    }
-}
