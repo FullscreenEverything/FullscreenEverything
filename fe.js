@@ -1,6 +1,10 @@
 document.addEventListener("mouseover", mouseOver);
 document.addEventListener("mouseout", mouseOut);
 document.addEventListener("click", click);
+document.addEventListener("fullscreenchange", fschange);
+
+let bgc_bak;
+let event_target;
 
 function mouseOver(event) {
     if (!document.fullscreenElement) {
@@ -26,6 +30,8 @@ function click(event) {
     }
 
     event.target.style.outline = "";
+    event_target = event.target;
+    bgc_bak = event.target.style.backgroundColor;
     event.target.style.backgroundColor = getBGC(event.target);
 }
 
@@ -91,5 +97,12 @@ function colorValues(color)
         {
             return +a
         });
+    }
+}
+
+function fschange() {
+    // if exit fullscreen
+    if (!document.fullscreenElement) {
+        event_target.style.backgroundColor = bgc_bak;
     }
 }
