@@ -29,16 +29,25 @@ function click(event) {
     event.target.style.backgroundColor = getBGC(event.target);
 }
 
-// TODO: calc alpha
 function getBGC(elem) {
+    let res = [0, 0, 0];
+    let alpha = 1;
     while (elem) {
         let cv = colorValues(window.getComputedStyle(elem).backgroundColor);
+        res[0] += cv[0] * cv[3] * alpha;
+        res[1] += cv[1] * cv[3] * alpha;
+        res[2] += cv[2] * cv[3] * alpha;
+        alpha *= 1 - cv[3];
         if (cv[3]==1)
-            return "rgb("+cv[0]+","+cv[1]+","+cv[2]+")";
+            break;
         else
             elem = elem.parentElement;
     }
-    return "white";
+    // overlay color with white
+    res[0] += 255 * alpha;
+    res[1] += 255 * alpha;
+    res[2] += 255 * alpha;
+    return "rgba("+res[0]+","+res[1]+","+res[2]+")";
 }
 
 // https://gist.github.com/oriadam/396a4beaaad465ca921618f2f2444d49
