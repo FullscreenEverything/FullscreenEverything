@@ -18,6 +18,7 @@ if (!registered) {
     document.addEventListener("mouseout", mouseOut);
     document.addEventListener("click", click);
     document.addEventListener("fullscreenchange", fschange);
+    document.addEventListener("keydown", keydown);
     registered = true;
 }
 
@@ -26,6 +27,7 @@ selecting = true;
 function mouseOver(event) {
     if (selecting) {
         bak_outline = event.target.style.outline;
+        bak_target = event.target;
         event.target.style.outline = "3px rgba(134, 206, 203, 0.8) solid";
     }
 }
@@ -70,6 +72,13 @@ function fschange() {
         event.target.style.flexDirection = bak_flex_direction;
         event.target.style.justifyContent = bak_flex_justify_content;
         event.target.style.alignItems = bak_align_items;
+    }
+}
+
+function keydown(event) {
+    if (event.key == "Escape" && selecting) {
+        selecting = false;
+        bak_target.style.outline = bak_outline;
     }
 }
 
