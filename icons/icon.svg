@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="47px" height="47px" viewBox="-0.5 -0.5 47 47">
+  <defs/>
+  <g>
+    <path d="M 3 13 L 3 8 Q 3 3 8 3 L 13 3" fill="none" stroke="#666666" stroke-width="6" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 43 13 L 43 8 Q 43 3 38 3 L 33 3" fill="none" stroke="#666666" stroke-width="6" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 13 43 L 8 43 Q 3 43 3 38 L 3 33" fill="none" stroke="#666666" stroke-width="6" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 33 43 L 38 43 Q 43 43 43 38 L 43 33" fill="none" stroke="#666666" stroke-width="6" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 23 23 Q 13 33 8 28 Q 3 23 8 18 Q 13 13 23 23 Q 33 33 38 28 Q 43 23 38 18 Q 33 13 23 23" fill="none" stroke="#6c8ebf" stroke-width="6" stroke-miterlimit="10" pointer-events="stroke"/>
+  </g>
+</svg>
