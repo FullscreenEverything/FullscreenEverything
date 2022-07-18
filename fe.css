@@ -1,0 +1,11 @@
+.FullscreenEverything_Hover {
+    outline: 3px rgba(134, 206, 203, 0.8) solid;
+}
+
+.FullscreenEverything_Fullscreen {
+    overflow: auto;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

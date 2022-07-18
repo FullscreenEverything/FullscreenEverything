@@ -7,8 +7,7 @@
     "action": {
         "default_title": "Click to activate"
     },
-    "background":
-    {
+    "background": {
         "service_worker": "main.js"
     },
     "icons": {
@@ -16,5 +15,9 @@
         "32": "/icons/32.png",
         "48": "/icons/48.png",
         "128": "/icons/128.png"
-    }
+    },
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "css": ["fe.css"]
+    }]
 }

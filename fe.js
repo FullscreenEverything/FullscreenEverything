@@ -1,11 +1,5 @@
 var bak_target;
 var bak_backgroundColor;
-var bak_outline;
-var bak_overflow;
-var bak_display
-var bak_flex_direction
-var bak_flex_justify_content
-var bak_align_items
 if (registered == undefined) {
     var registered = false;
 }
@@ -26,15 +20,14 @@ selecting = true;
 
 function mouseOver(event) {
     if (selecting) {
-        bak_outline = event.target.style.outline;
         bak_target = event.target;
-        event.target.style.outline = "3px rgba(134, 206, 203, 0.8) solid";
+        bak_target.classList.add("FullscreenEverything_Hover");
     }
 }
 
 function mouseOut(event) {
     if (selecting) {
-        event.target.style.outline = bak_outline;
+        event.target.classList.remove("FullscreenEverything_Hover");
     }
 }
 
@@ -43,22 +36,13 @@ function click(event) {
     if (selecting && !document.fullscreenElement) {
         selecting = false;
         event.target.requestFullscreen();
-        event.target.style.outline = bak_outline;
+        event.target.classList.remove("FullscreenEverything_Hover");
         // save style
         bak_target = event.target;
         bak_backgroundColor = event.target.style.backgroundColor;
-        bak_overflow = event.target.style.overflow;
-        bak_display = event.target.style.display;
-        bak_flex_direction = event.target.style.flexDirection;
-        bak_flex_justify_content = event.target.style.justifyContent;
-        bak_align_items = event.target.style.alignItems;
         // set style
         event.target.style.backgroundColor = getBGC(event.target);
-        event.target.style.overflow = "auto";
-        event.target.style.display = "inline-flex";
-        event.target.style.flexDirection = "column";
-        event.target.style.justifyContent = "center";
-        event.target.style.alignItems = "center";
+        event.target.classList.add("FullscreenEverything_Fullscreen");
     }
 }
 
@@ -67,18 +51,14 @@ function fschange() {
     if (!document.fullscreenElement) {
         // restore style
         bak_target.style.backgroundColor = bak_backgroundColor;
-        bak_target.style.overflow = bak_overflow;
-        event.target.style.display = bak_display;
-        event.target.style.flexDirection = bak_flex_direction;
-        event.target.style.justifyContent = bak_flex_justify_content;
-        event.target.style.alignItems = bak_align_items;
+        bak_target.classList.remove("FullscreenEverything_Fullscreen");
     }
 }
 
 function keydown(event) {
     if (event.key == "Escape" && selecting) {
         selecting = false;
-        bak_target.style.outline = bak_outline;
+        bak_target.classList.remove("FullscreenEverything_Hover");
     }
 }
 
